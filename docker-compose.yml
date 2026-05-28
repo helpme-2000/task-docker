@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web-app:
+    build: ./web-app
+    container_name: python_web_node
+    ports:
+      - "8098:8080"
+    networks:
+      - lab-network
+
+  static-nginx:
+    build: ./static-nginx
+    container_name: nginx_proxy_node
+    ports:
+      - "80:80"
+    networks:
+      - lab-network
+    depends_on:
+      - web-app
+
+  client-logger:
+    build: ./client-logger
+    container_name: client_logger_node
+    networks:
+      - lab-network
+    depends_on:
+      - web-app
+
+networks:
+  lab-network:
+    driver: bridge
