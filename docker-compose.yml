@@ -5,7 +5,7 @@ services:
     build: ./web-app
     container_name: python_web_node
     ports:
-      - "8098:8080"
+      - "8098:6666"
     networks:
       - lab-network
 
